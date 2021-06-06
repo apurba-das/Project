@@ -7,13 +7,7 @@ pipeline {
        maven "Maven"
     }
  stages {
-	 stage('checkout') {
-           steps {
-             
-                git branch: 'master', url: 'https://github.com/apurba-das/Project.git'
-             
-          }
-        }
+	 
  	stage('Execute Maven') {
            steps {
              
