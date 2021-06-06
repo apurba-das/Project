@@ -1,25 +1,23 @@
 pipeline {
-    agent any
-	
-	  tools
+    agent {
+           label "Slave1"
+         }
+   tools
     {
        maven "Maven"
     }
  stages {
- 	stage('checkout') {
-           steps {
-             
-                git branch: 'master', url: 'https://github.com/apurba-das/Project.git'
-             
-          }
-        }
-	stage('Execute Maven') {
+ 	stage('Execute Maven') {
            steps {
              
                 sh 'mvn package'             
           }
         }
-        
+	 stage('unit test') {
+	       steps {
+		       sh "mvn test"
+	  	       }
+	       }
 	stage('Docker Build and Tag') {
            steps {
               
