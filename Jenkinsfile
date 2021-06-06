@@ -21,8 +21,8 @@ pipeline {
 	stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t privaterepo1:latest .' 
-                sh 'docker tag privaterepo1 apurba21/privaterepo1:latest'               
+                sh 'sudo docker build -t privaterepo1:latest .' 
+                sh 'sudo docker tag privaterepo1 apurba21/privaterepo1:latest'               
           }
         }
 	 
@@ -30,7 +30,7 @@ pipeline {
           
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push apurba21/privaterepo1:latest'
+          sh  'sudo docker push apurba21/privaterepo1:latest'
         }                  
           }
         }
@@ -39,14 +39,14 @@ pipeline {
 	stage('Run Docker container on Jenkins Agent') {
              
            steps  {			     
-               sh "docker run -d -p 8003:8080 apurba21/privaterepo1"
+               sh "sudo docker run -d -p 8003:8080 apurba21/privaterepo1"
  
            }
         }
 	stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@172.31.89.123 run -d -p 8003:8080 apurba21/privaterepo1"
+                sh "sudo docker -H ssh://jenkins@172.31.89.123 run -d -p 8003:8080 apurba21/privaterepo1"
  
            }
         }
