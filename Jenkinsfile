@@ -40,7 +40,7 @@ pipeline {
      
 	stage('Run Docker container on Jenkins Agent') {
              
-           steps  {			     {
+           steps  {			     
                sh "docker run -d -p 8003:8080 apurba21/privaterepo1"
  
            }
